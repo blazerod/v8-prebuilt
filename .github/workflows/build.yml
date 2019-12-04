@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 1
           submodules: true
 
-      - name: Build V8
+      - name: Build V8 v7.8.279.23
         id: build
         run: ./build-v8.sh ${{ runner.os }} v7.8.279.23
 
