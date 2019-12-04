@@ -1,0 +1,26 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    name: Build V8 on ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: "${{ matrix.os }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Cache V8 source
+        uses: actions/cache@v1
+        with:
+          path: v8
+          key: "${{ runner.os }}-v8"
+
+      - name: Build V8
+        run: ./build-v8.sh ${{ runner.os }} 7.7.299.9

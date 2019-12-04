@@ -1,0 +1,11 @@
+_gclient*
+.cipd
+.gclient*
+*.log
+*.tar.gz
+build
+libv8.a
+node_modules
+package
+tmp
+v8
