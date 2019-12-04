@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: "${{ steps.build.outputs.package }}"
-          path: "${{ steps.build.outputs.package_path }}"
+          path: package
