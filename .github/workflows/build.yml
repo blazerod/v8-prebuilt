@@ -16,11 +16,12 @@ jobs:
           fetch-depth: 1
           submodules: true
 
-      - name: Cache V8 source
-        uses: actions/cache@v1
-        with:
-          path: v8
-          key: "${{ runner.os }}-v8"
-
       - name: Build V8
+        id: build
         run: ./build-v8.sh ${{ runner.os }} 7.7.299.9
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: "${{ steps.build.outputs.package }}"
+          path: "${{ steps.build.outputs.package_path }}"

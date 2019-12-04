@@ -105,4 +105,8 @@ rm -rf package
 mkdir package
 cp build/obj/libv8_monolith.a package/libv8.a
 cp -r v8/include package/include
-tar czf build/package.tar.gz -C package .
+tar czf build/v8-v$version-$platform.tar.gz -C package .
+
+# Output package metadata for GitHub actions
+echo "::set-output name=package::v8-v$version-$platform.tar.gz"
+echo "::set-output name=package_path::build/v8-v$version-$platform.tar.gz"
