@@ -18,7 +18,7 @@ jobs:
 
       - name: Build V8
         id: build
-        run: ./build-v8.sh ${{ runner.os }} 7.7.299.9
+        run: ./build-v8.sh ${{ runner.os }} v7.7.299.9
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1

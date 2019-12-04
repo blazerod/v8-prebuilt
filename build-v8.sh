@@ -4,7 +4,7 @@ set -euo pipefail
 PATH="$PWD/depot_tools:$PATH"
 
 platform=$1
-version=$2
+version=${2#"v"}
 
 spec=`cat <<EOF
 solutions = [{
