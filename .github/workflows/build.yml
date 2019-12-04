@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build V8 for ${{ runner.os }}
+    name: Build V8 using ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
