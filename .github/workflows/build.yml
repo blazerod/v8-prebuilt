@@ -1,10 +1,13 @@
 name: Build
 
-on: push
+on:
+  push:
+    tags-ignore:
+      - "v*"
 
 jobs:
   build:
-    name: Build V8 on ${{ matrix.os }}
+    name: Build V8 for ${{ runner.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
