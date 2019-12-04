@@ -57,6 +57,20 @@ EOF
 `
 build_args="${build_args//$'\n'/}"
 
+# Resolve platform name
+case $platform in
+  Linux)
+    platform=linux
+    ;;
+  macOS)
+    platform=darwin
+    ;;
+  *)
+    echo "Invalid platform $platform"
+    exit 1
+    ;;
+esac
+
 # Acquire V8 source
 if [ ! -d v8 ]; then
   fetch v8
