@@ -76,13 +76,6 @@ if [ ! -d v8 ]; then
   fetch v8
 fi
 
-# Checkout specified version
-cd v8
-git checkout $version
-git clean --force -d -x
-git reset --hard
-cd ..
-
 # Prepare build directory
 rm -rf build
 mkdir build
