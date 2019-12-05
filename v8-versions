@@ -1,5 +1,7 @@
 # List V8 versions to build here and the corresponding tags will be created
 
+7.5.288.31
+7.6.303.31
 7.7.299.9
 7.7.299.15
 7.8.279.23
