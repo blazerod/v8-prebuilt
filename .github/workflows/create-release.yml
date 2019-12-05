@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
+      - name: Compute release body
+        id: release_body
+        run: ./.github/scripts/compute-release-body.js ${{ github.ref }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -20,6 +23,4 @@ jobs:
         with:
           tag_name: "${{ github.ref }}"
           release_name: V8 ${{ github.ref }}
-          body: V8 ${{ github.ref }}
-          draft: false
-          prerelease: false
+          body: "${{ steps.release_body.outputs.release_body }}"
