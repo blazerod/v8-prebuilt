@@ -1,0 +1,11 @@
+name: Show Event
+
+on: release
+
+jobs:
+  release:
+    name: Show event
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show event
+        run: cat "$GITHUB_EVENT_PATH" | jq -M .
