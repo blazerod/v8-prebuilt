@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - "v*"
 
 jobs:
   release:
@@ -12,9 +13,6 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: "${{ matrix.os }}"
     steps:
-      - name: Show event
-        run: cat "$GITHUB_EVENT_PATH" | jq -M .
-
       - name: Checkout
         uses: actions/checkout@v1
         with:
@@ -24,6 +22,17 @@ jobs:
       - name: Build V8
         id: build
         run: ./build-v8.sh ${{ runner.os }} ${{ github.ref }}
+
+      - name: Create release
+        id: release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          tag_name: "${{ github.ref }}"
+          release_name: "V8 ${{ github.ref }}"
+          draft: false
+          prerelease: false
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
@@ -36,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          upload_url: "${{ github.event.upload_url }}"
+          upload_url: "${{ steps.release.outputs.upload_url }}"
           asset_path: "${{ steps.build.outputs.package_path }}"
           asset_name: "${{ steps.build.outputs.package }}.tar.gz"
           asset_content_type: application/gzip
