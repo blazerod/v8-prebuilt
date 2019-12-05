@@ -4,7 +4,7 @@ on: release
 
 jobs:
   release:
-    name: Show event
+    name: Show event info
     runs-on: ubuntu-latest
     steps:
       - name: Show event
