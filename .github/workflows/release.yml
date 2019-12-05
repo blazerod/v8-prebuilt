@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          upload_url: "https://uploads.github.com/repos/BlazerodJS/v8-prebuilt/releases/${{ github.event.release.id }}/assets"
+          upload_url: "${{ github.event.release.upload_url }}"
           asset_path: "${{ steps.build.outputs.package_path }}"
           asset_name: "${{ steps.build.outputs.package }}.tar.gz"
           asset_content_type: application/gzip
