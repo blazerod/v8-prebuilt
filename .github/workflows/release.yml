@@ -1,9 +1,9 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types:
+      - created
 
 jobs:
   release:
@@ -23,29 +23,18 @@ jobs:
         id: build
         run: ./build-v8.sh ${{ runner.os }} ${{ github.ref }}
 
-      - name: Create release
-        id: release
-        uses: actions/create-release@v1.0.0
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        with:
-          tag_name: "${{ github.ref }}"
-          release_name: "V8 ${{ github.ref }}"
-          draft: false
-          prerelease: false
-
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
           name: "${{ steps.build.outputs.package }}"
           path: package
 
-      - name: Upload release
+      - name: Upload release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          upload_url: "${{ steps.release.outputs.upload_url }}"
+          upload_url: "https://uploads.github.com/repos/BlazerodJS/v8-prebuilt/releases/${{ github.event.release.id }}/assets"
           asset_path: "${{ steps.build.outputs.package_path }}"
           asset_name: "${{ steps.build.outputs.package }}.tar.gz"
           asset_content_type: application/gzip
