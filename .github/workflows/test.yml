@@ -1,9 +1,6 @@
-name: Build
+name: Test
 
-on:
-  push:
-    branches-ignore:
-      - "refs/tags/**"
+on: push
 
 jobs:
   build:
