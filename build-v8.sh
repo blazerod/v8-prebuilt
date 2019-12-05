@@ -5,7 +5,6 @@ PATH="$PWD/depot_tools:$PATH"
 
 platform=$1
 version=${2#"v"}
-version="${version#"refs/tags/v"}"
 
 spec=`cat <<EOF
 solutions = [{
