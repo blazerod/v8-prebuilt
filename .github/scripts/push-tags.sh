@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-git_sha1=$(git rev-parse HEAD)
+sha=$(git rev-parse HEAD)
 
 check_for_tag() {
   curl \
@@ -17,7 +17,7 @@ create_tag() {
   -d @- <<EOF
 {
   "ref": "refs/tags/$1",
-  "sha": "$commit"
+  "sha": "$sha"
 }
 EOF
 }
